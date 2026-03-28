@@ -1,0 +1,10 @@
+{
+  "name": "appstore-screenshots",
+  "description": "Automate App Store and Play Store screenshot creation for Expo/React Native apps. Full pipeline: capture via Maestro, add device frames with fastlane, composite marketing overlays with Pillow.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nicolas Torres"
+  },
+  "homepage": "https://github.com/nicolastorres/appstore-screenshots",
+  "license": "MIT"
+}

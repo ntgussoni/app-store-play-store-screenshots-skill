@@ -32,13 +32,22 @@ Full pipeline from raw app screens to store-ready marketing assets:
 | Play Store | Phone | 1080×1920+ |
 | Play Store | Feature Graphic | 1024×500 |
 
-## Usage
-
-Install via Claude Code:
+## Install
 
 ```bash
-# From your Expo project root, ask Claude:
-# "Create App Store screenshots for my app"
+/plugin install https://github.com/nicolastorres/appstore-screenshots
+```
+
+Or load locally during development:
+
+```bash
+claude --plugin-dir ./appstore-screenshots
+```
+
+Then invoke the skill:
+
+```
+/appstore-screenshots:appstore-screenshots
 ```
 
 Or use the scripts directly:
@@ -68,7 +77,7 @@ python3 scripts/compose.py \
 
 ## Skill definition
 
-See [`SKILL.md`](SKILL.md) for the full Claude Code skill spec — covers all phases, Maestro flow examples, troubleshooting, and parameter reference.
+See [`skills/appstore-screenshots/SKILL.md`](skills/appstore-screenshots/SKILL.md) for the full Claude Code skill spec — covers all phases, Maestro flow examples, troubleshooting, and parameter reference.
 
 ## License
 
