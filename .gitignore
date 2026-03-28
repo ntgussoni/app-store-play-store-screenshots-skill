@@ -25,7 +25,7 @@ screenshots/backgrounds/
 *.jpg
 *.jpeg
 !examples/**/*.png
-
+!banner.png
 # Logs
 *.log
 /tmp/
