@@ -1,3 +1,5 @@
+![image](./banner.png)
+
 # app-store-play-store-screenshots-skill
 
 > A Claude Code plugin that automates App Store & Google Play screenshot creation for Expo / React Native apps — from raw simulator to store-ready marketing assets.
@@ -8,14 +10,14 @@
 
 Just tell Claude you want screenshots and it handles the full pipeline:
 
-| Phase | What happens |
-|-------|-------------|
-| **Discover** | Reads your `app/` directory and understands your screens |
-| **Plan** | Proposes screenshot concepts with headlines matched to your branding |
-| **Capture** | Drives the iOS Simulator and Android Emulator via Maestro flows |
-| **Frame** | Wraps devices with `fastlane frameit` frames |
-| **Compose** | Layers gradient backgrounds, marketing text, device glow, and particle effects |
-| **Export** | Outputs final PNGs at exact store-required dimensions |
+| Phase        | What happens                                                                   |
+| ------------ | ------------------------------------------------------------------------------ |
+| **Discover** | Reads your `app/` directory and understands your screens                       |
+| **Plan**     | Proposes screenshot concepts with headlines matched to your branding           |
+| **Capture**  | Drives the iOS Simulator and Android Emulator via Maestro flows                |
+| **Frame**    | Wraps devices with `fastlane frameit` frames                                   |
+| **Compose**  | Layers gradient backgrounds, marketing text, device glow, and particle effects |
+| **Export**   | Outputs final PNGs at exact store-required dimensions                          |
 
 ---
 
@@ -42,12 +44,12 @@ Or invoke directly:
 
 ## Output sizes
 
-| Store | Device | Canvas size |
-|-------|--------|-------------|
-| App Store | iPhone 6.9" | 1290 × 2796 |
-| App Store | iPad 13" | 2064 × 2752 |
-| Play Store | Phone | 1080 × 1920+ |
-| Play Store | Feature Graphic | 1024 × 500 |
+| Store      | Device          | Canvas size  |
+| ---------- | --------------- | ------------ |
+| App Store  | iPhone 6.9"     | 1290 × 2796  |
+| App Store  | iPad 13"        | 2064 × 2752  |
+| Play Store | Phone           | 1080 × 1920+ |
+| Play Store | Feature Graphic | 1024 × 500   |
 
 ---
 
@@ -96,21 +98,21 @@ python3 scripts/compose.py \
   --particles 50
 ```
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--screenshot` | — | Framed device PNG (omit for text-only feature graphic) |
-| `--size` | required | Canvas dimensions, e.g. `1290x2796` |
-| `--bg-color` | required | Background hex color |
-| `--bg-gradient` | — | Gradient end color |
-| `--headline` | required | Marketing headline |
-| `--subheadline` | — | Supporting text below the headline |
-| `--headline-color` | `#FFFFFF` | Headline hex color |
-| `--font` | system font | Path to a `.ttf` file |
-| `--device-scale` | `0.72` | Device width as a fraction of canvas width |
-| `--device-glow` | — | Soft bloom behind the device |
-| `--particles` | `0` | Ambient background dots (40–80 is a good range) |
-| `--bg-image` | — | Background photo, cover-cropped to canvas |
-| `--bg-overlay-opacity` | `0.55` | Darkness of the overlay over the background image |
+| Flag                   | Default     | Description                                            |
+| ---------------------- | ----------- | ------------------------------------------------------ |
+| `--screenshot`         | —           | Framed device PNG (omit for text-only feature graphic) |
+| `--size`               | required    | Canvas dimensions, e.g. `1290x2796`                    |
+| `--bg-color`           | required    | Background hex color                                   |
+| `--bg-gradient`        | —           | Gradient end color                                     |
+| `--headline`           | required    | Marketing headline                                     |
+| `--subheadline`        | —           | Supporting text below the headline                     |
+| `--headline-color`     | `#FFFFFF`   | Headline hex color                                     |
+| `--font`               | system font | Path to a `.ttf` file                                  |
+| `--device-scale`       | `0.72`      | Device width as a fraction of canvas width             |
+| `--device-glow`        | —           | Soft bloom behind the device                           |
+| `--particles`          | `0`         | Ambient background dots (40–80 is a good range)        |
+| `--bg-image`           | —           | Background photo, cover-cropped to canvas              |
+| `--bg-overlay-opacity` | `0.55`      | Darkness of the overlay over the background image      |
 
 ### `scripts/launch_simulators.sh`
 
