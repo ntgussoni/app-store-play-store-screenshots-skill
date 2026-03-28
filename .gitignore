@@ -1,0 +1,31 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Screenshot working directories (generated files, not source)
+screenshots/raw/
+screenshots/composed/
+screenshots/final/
+screenshots/maestro-flows/
+screenshots/backgrounds/
+*.png
+*.jpg
+*.jpeg
+!examples/**/*.png
+
+# Logs
+*.log
+/tmp/
