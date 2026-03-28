@@ -1,65 +1,91 @@
-# appstore-screenshots
+# app-store-play-store-screenshots-skill
 
-A Claude Code skill that automates App Store and Google Play screenshot creation for Expo/React Native apps on Mac.
+> A Claude Code plugin that automates App Store & Google Play screenshot creation for Expo / React Native apps — from raw simulator to store-ready marketing assets.
 
-## What it does
+---
 
-Full pipeline from raw app screens to store-ready marketing assets:
+## How it works
 
-1. **Discovers** your app's screens via Expo Router file structure
-2. **Plans** screenshot concepts with headlines tuned to your app's branding
-3. **Captures** screenshots via [Maestro](https://maestro.mobile.dev/) automation on iOS Simulator and Android Emulator
-4. **Frames** devices using `fastlane frameit`
-5. **Composites** marketing overlays — gradient backgrounds, headline text, device glow, particle effects
-6. **Exports** at correct sizes for both stores
+Just tell Claude you want screenshots and it handles the full pipeline:
 
-## Requirements
+| Phase | What happens |
+|-------|-------------|
+| **Discover** | Reads your `app/` directory and understands your screens |
+| **Plan** | Proposes screenshot concepts with headlines matched to your branding |
+| **Capture** | Drives the iOS Simulator and Android Emulator via Maestro flows |
+| **Frame** | Wraps devices with `fastlane frameit` frames |
+| **Compose** | Layers gradient backgrounds, marketing text, device glow, and particle effects |
+| **Export** | Outputs final PNGs at exact store-required dimensions |
 
-- macOS
-- Xcode + iOS Simulator
-- [Maestro](https://maestro.mobile.dev/) (`~/.maestro/bin/maestro`)
-- [fastlane](https://fastlane.tools/) (`gem install fastlane`)
-- ImageMagick 7 (`brew install imagemagick`)
-- Python 3 + Pillow (`pip3 install Pillow`)
-- Android SDK (optional, for Play Store screenshots)
-
-## Output sizes
-
-| Store | Device | Size |
-|-------|--------|------|
-| App Store | iPhone 6.9" | 1290×2796 |
-| App Store | iPad 13" | 2064×2752 |
-| Play Store | Phone | 1080×1920+ |
-| Play Store | Feature Graphic | 1024×500 |
+---
 
 ## Install
 
-```bash
-/plugin install https://github.com/nicolastorres/appstore-screenshots
+```
+/plugin marketplace add ntgussoni/app-store-play-store-screenshots-skill
+/plugin install appstore-screenshots@appstore-screenshots
 ```
 
-Or load locally during development:
+Then just ask Claude:
 
-```bash
-claude --plugin-dir ./appstore-screenshots
+```
+Create App Store screenshots for my app
 ```
 
-Then invoke the skill:
+Or invoke directly:
 
 ```
 /appstore-screenshots:appstore-screenshots
 ```
 
-Or use the scripts directly:
+---
+
+## Output sizes
+
+| Store | Device | Canvas size |
+|-------|--------|-------------|
+| App Store | iPhone 6.9" | 1290 × 2796 |
+| App Store | iPad 13" | 2064 × 2752 |
+| Play Store | Phone | 1080 × 1920+ |
+| Play Store | Feature Graphic | 1024 × 500 |
+
+---
+
+## Requirements
+
+Install these once before running the skill:
 
 ```bash
-# Launch simulators
-bash scripts/launch_simulators.sh
+# Maestro — UI automation
+curl -Ls "https://get.maestro.mobile.dev" | bash
 
-# Compose a screenshot
+# fastlane — device frames
+gem install fastlane
+fastlane frameit download_frames
+
+# ImageMagick 7 — image processing
+brew install imagemagick
+
+# Pillow — compositor
+pip3 install Pillow
+```
+
+Also needed: **Xcode + iOS Simulator**, and optionally **Android SDK** for Play Store screenshots.
+
+---
+
+## Scripts
+
+The plugin ships two standalone scripts you can also use directly:
+
+### `scripts/compose.py`
+
+Composites a framed device screenshot onto a branded marketing canvas.
+
+```bash
 python3 scripts/compose.py \
-  --screenshot path/to/framed_device.png \
-  --output output/01_hero.png \
+  --screenshot path/to/framed.png \
+  --output out/01_hero.png \
   --size 1290x2796 \
   --bg-color "#181020" \
   --bg-gradient "#2A1B33" \
@@ -70,15 +96,38 @@ python3 scripts/compose.py \
   --particles 50
 ```
 
-## Scripts
+| Flag | Default | Description |
+|------|---------|-------------|
+| `--screenshot` | — | Framed device PNG (omit for text-only feature graphic) |
+| `--size` | required | Canvas dimensions, e.g. `1290x2796` |
+| `--bg-color` | required | Background hex color |
+| `--bg-gradient` | — | Gradient end color |
+| `--headline` | required | Marketing headline |
+| `--subheadline` | — | Supporting text below the headline |
+| `--headline-color` | `#FFFFFF` | Headline hex color |
+| `--font` | system font | Path to a `.ttf` file |
+| `--device-scale` | `0.72` | Device width as a fraction of canvas width |
+| `--device-glow` | — | Soft bloom behind the device |
+| `--particles` | `0` | Ambient background dots (40–80 is a good range) |
+| `--bg-image` | — | Background photo, cover-cropped to canvas |
+| `--bg-overlay-opacity` | `0.55` | Darkness of the overlay over the background image |
 
-- **`scripts/compose.py`** — Pillow compositor: canvas + gradient + device frame + headline text + glow + particles
-- **`scripts/launch_simulators.sh`** — Boots iPhone 16 Pro Max + Android AVD and waits until ready
+### `scripts/launch_simulators.sh`
 
-## Skill definition
+Boots iPhone 16 Pro Max and an Android AVD, then waits until both are ready.
 
-See [`skills/appstore-screenshots/SKILL.md`](skills/appstore-screenshots/SKILL.md) for the full Claude Code skill spec — covers all phases, Maestro flow examples, troubleshooting, and parameter reference.
+```bash
+bash scripts/launch_simulators.sh [android_avd_name]
+```
+
+---
+
+## Skill reference
+
+See [`skills/appstore-screenshots/SKILL.md`](skills/appstore-screenshots/SKILL.md) for the full spec — all five phases, Maestro flow examples, common failure fixes, and every parameter explained.
+
+---
 
 ## License
 
-MIT
+MIT © [Nicolas Torres](https://github.com/ntgussoni)
