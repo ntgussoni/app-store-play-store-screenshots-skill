@@ -1,0 +1,22 @@
+{
+  "name": "appstore-screenshots",
+  "owner": {
+    "name": "Nicolas Torres"
+  },
+  "metadata": {
+    "description": "App Store and Play Store screenshot automation for Expo/React Native apps on Mac"
+  },
+  "plugins": [
+    {
+      "name": "appstore-screenshots",
+      "source": "./",
+      "description": "Full pipeline: capture via Maestro, device frames via fastlane, marketing overlays via Pillow. Covers iOS App Store and Google Play Store.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Nicolas Torres"
+      },
+      "license": "MIT",
+      "keywords": ["app-store", "screenshots", "expo", "react-native", "maestro", "fastlane"]
+    }
+  ]
+}
